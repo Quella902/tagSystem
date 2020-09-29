@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.tag.mapper.TagFillTemplateMapper">
+    
+    <resultMap type="TagFillTemplate" id="TagFillTemplateResult">
+        <result property="id"    column="id"    />
+        <result property="uuid"    column="uuid"    />
+        <result property="tempName"    column="temp_name"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="version"    column="version"    />
+        <result property="companyUuid"    column="company_uuid"    />
+        <result property="companyName"    column="company_name"    />
+    </resultMap>
+
+    <sql id="selectTagFillTemplateVo">
+        select id, uuid, temp_name, remark, create_by, create_time, update_by, update_time, version, company_uuid, company_name from tag_fill_template
+    </sql>
+
+    <select id="selectTagFillTemplateList" parameterType="TagFillTemplate" resultMap="TagFillTemplateResult">
+        <include refid="selectTagFillTemplateVo"/>
+        <where>  
+            <if test="tempName != null  and tempName != ''"> and temp_name like concat('%', #{tempName}, '%')</if>
+            <if test="companyName != null  and companyName != ''"> and company_name like concat('%', #{companyName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectTagFillTemplateById" parameterType="Long" resultMap="TagFillTemplateResult">
+        <include refid="selectTagFillTemplateVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTagFillTemplate" parameterType="TagFillTemplate">
+        insert into tag_fill_template
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uuid != null">uuid,</if>
+            <if test="tempName != null">temp_name,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="version != null">version,</if>
+            <if test="companyUuid != null">company_uuid,</if>
+            <if test="companyName != null">company_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uuid != null">#{uuid},</if>
+            <if test="tempName != null">#{tempName},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="version != null">#{version},</if>
+            <if test="companyUuid != null">#{companyUuid},</if>
+            <if test="companyName != null">#{companyName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTagFillTemplate" parameterType="TagFillTemplate">
+        update tag_fill_template
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tempName != null">temp_name = #{tempName},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="version != null">version = #{version},</if>
+            <if test="companyUuid != null">company_uuid = #{companyUuid},</if>
+            <if test="companyName != null">company_name = #{companyName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTagFillTemplateById" parameterType="Long">
+        delete from tag_fill_template where id = #{id}
+    </delete>
+
+    <delete id="deleteTagFillTemplateByIds" parameterType="String">
+        delete from tag_fill_template where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

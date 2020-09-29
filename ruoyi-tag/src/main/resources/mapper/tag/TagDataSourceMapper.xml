@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.tag.mapper.TagDataSourceMapper">
+    
+    <resultMap type="TagDataSource" id="TagDataSourceResult">
+        <result property="id"    column="id"    />
+        <result property="uuid"    column="uuid"    />
+        <result property="tagName"    column="tag_name"    />
+        <result property="tagUuid"    column="tag_uuid"    />
+        <result property="dataType"    column="data_type"    />
+        <result property="dataSource"    column="data_source"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+
+    <sql id="selectTagDataSourceVo">
+        select id, uuid, tag_name, tag_uuid, data_type, data_source, create_by, create_time, update_by, update_time, version from tag_data_source
+    </sql>
+
+    <select id="selectTagDataSourceList" parameterType="TagDataSource" resultMap="TagDataSourceResult">
+        <include refid="selectTagDataSourceVo"/>
+        <where>  
+            <if test="tagName != null  and tagName != ''"> and tag_name like concat('%', #{tagName}, '%')</if>
+            <if test="dataType != null  and dataType != ''"> and data_type = #{dataType}</if>
+            <if test="version != null "> and version = #{version}</if>
+        </where>
+    </select>
+    
+    <select id="selectTagDataSourceById" parameterType="Long" resultMap="TagDataSourceResult">
+        <include refid="selectTagDataSourceVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTagDataSource" parameterType="TagDataSource">
+        insert into tag_data_source
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uuid != null">uuid,</if>
+            <if test="tagName != null">tag_name,</if>
+            <if test="tagUuid != null">tag_uuid,</if>
+            <if test="dataType != null">data_type,</if>
+            <if test="dataSource != null">data_source,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="version != null">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uuid != null">#{uuid},</if>
+            <if test="tagName != null">#{tagName},</if>
+            <if test="tagUuid != null">#{tagUuid},</if>
+            <if test="dataType != null">#{dataType},</if>
+            <if test="dataSource != null">#{dataSource},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="version != null">#{version},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTagDataSource" parameterType="TagDataSource">
+        update tag_data_source
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tagName != null">tag_name = #{tagName},</if>
+            <if test="tagUuid != null">tag_uuid = #{tagUuid},</if>
+            <if test="dataType != null">data_type = #{dataType},</if>
+            <if test="dataSource != null">data_source = #{dataSource},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="version != null">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTagDataSourceById" parameterType="Long">
+        delete from tag_data_source where id = #{id}
+    </delete>
+
+    <delete id="deleteTagDataSourceByIds" parameterType="String">
+        delete from tag_data_source where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

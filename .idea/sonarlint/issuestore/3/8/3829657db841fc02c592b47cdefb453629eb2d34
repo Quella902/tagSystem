@@ -1,0 +1,24 @@
+
+>
+java:S1148G"#Use a logger to log this exception.(Âşÿâûÿÿÿÿ
+E
+java:S2093"*Change this "try" to a try-with-resources.(ç£êúÿÿÿÿ
+(
+java:S2176"Rename this class.(ô÷é
+i
+java:S4042Z"NUse "java.nio.file.Files#delete" here for better messages on error conditions.(²Œ­ûÿÿÿÿ
+>
+java:S1148<"#Use a logger to log this exception.(Âşÿâûÿÿÿÿ
+m
+java:S27370"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û
+v
+java:S3008"[Rename this field "FILENAME_PATTERN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Àºû®üÿÿÿÿ
+U
+java:S4719€">Replace charset name argument with StandardCharsets.ISO_8859_1(äÌë§
+\
+java:S1192z"FDefine a constant instead of duplicating this literal "utf-8" 3 times.(ÆãÖñ
+Q
+java:S1444"6Make this "public static FILENAME_PATTERN" field final(Àºû®üÿÿÿÿ
+w
+java:S1104"\Make FILENAME_PATTERN a static final constant or non-public and provide accessors if needed.(Àºû®üÿÿÿÿ
+U	java:S899Z";Do something with the "boolean" value returned by "delete".(²Œ­ûÿÿÿÿ

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.tag.mapper.TagFillTemplateGroupMapper">
+    
+    <resultMap type="TagFillTemplateGroup" id="TagFillTemplateGroupResult">
+        <result property="id"    column="id"    />
+        <result property="uuid"    column="uuid"    />
+        <result property="groupName"    column="group_name"    />
+        <result property="tempName"    column="temp_name"    />
+        <result property="tempUuid"    column="temp_uuid"    />
+        <result property="toUse"    column="to_use"    />
+        <result property="sort"    column="sort"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+
+    <sql id="selectTagFillTemplateGroupVo">
+        select id, uuid, group_name, temp_name, temp_uuid, to_use, sort, create_by, create_time, update_by, update_time, version from tag_fill_template_group
+    </sql>
+
+    <select id="selectTagFillTemplateGroupList" parameterType="TagFillTemplateGroup" resultMap="TagFillTemplateGroupResult">
+        <include refid="selectTagFillTemplateGroupVo"/>
+        <where>  
+            <if test="groupName != null  and groupName != ''"> and group_name like concat('%', #{groupName}, '%')</if>
+            <if test="tempName != null  and tempName != ''"> and temp_name like concat('%', #{tempName}, '%')</if>
+            <if test="toUse != null "> and to_use = #{toUse}</if>
+        </where>
+    </select>
+    
+    <select id="selectTagFillTemplateGroupById" parameterType="Long" resultMap="TagFillTemplateGroupResult">
+        <include refid="selectTagFillTemplateGroupVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTagFillTemplateGroup" parameterType="TagFillTemplateGroup">
+        insert into tag_fill_template_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uuid != null">uuid,</if>
+            <if test="groupName != null">group_name,</if>
+            <if test="tempName != null">temp_name,</if>
+            <if test="tempUuid != null">temp_uuid,</if>
+            <if test="toUse != null">to_use,</if>
+            <if test="sort != null">sort,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="version != null">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uuid != null">#{uuid},</if>
+            <if test="groupName != null">#{groupName},</if>
+            <if test="tempName != null">#{tempName},</if>
+            <if test="tempUuid != null">#{tempUuid},</if>
+            <if test="toUse != null">#{toUse},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="version != null">#{version},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTagFillTemplateGroup" parameterType="TagFillTemplateGroup">
+        update tag_fill_template_group
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="groupName != null">group_name = #{groupName},</if>
+            <if test="tempName != null">temp_name = #{tempName},</if>
+            <if test="tempUuid != null">temp_uuid = #{tempUuid},</if>
+            <if test="toUse != null">to_use = #{toUse},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="version != null">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTagFillTemplateGroupById" parameterType="Long">
+        delete from tag_fill_template_group where id = #{id}
+    </delete>
+
+    <delete id="deleteTagFillTemplateGroupByIds" parameterType="String">
+        delete from tag_fill_template_group where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

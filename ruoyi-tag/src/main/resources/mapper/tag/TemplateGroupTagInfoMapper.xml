@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.tag.mapper.TemplateGroupTagInfoMapper">
+    
+    <resultMap type="TemplateGroupTagInfo" id="TemplateGroupTagInfoResult">
+        <result property="id"    column="id"    />
+        <result property="uuid"    column="uuid"    />
+        <result property="tempUuid"    column="temp_uuid"    />
+        <result property="groupUuid"    column="group_uuid"    />
+        <result property="tagName"    column="tag_name"    />
+        <result property="tagUuid"    column="tag_uuid"    />
+        <result property="dataType"    column="data_type"    />
+        <result property="tagUnit"    column="tag_unit"    />
+        <result property="fillTagName"    column="fill_tag_name"    />
+        <result property="fillType"    column="fill_type"    />
+        <result property="排序"    column="排序"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+
+    <sql id="selectTemplateGroupTagInfoVo">
+        select id, uuid, temp_uuid, group_uuid, tag_name, tag_uuid, data_type, tag_unit, fill_tag_name, fill_type, 排序, create_by, create_time, update_by, update_time, version from template_group_tag_info
+    </sql>
+
+    <select id="selectTemplateGroupTagInfoList" parameterType="TemplateGroupTagInfo" resultMap="TemplateGroupTagInfoResult">
+        <include refid="selectTemplateGroupTagInfoVo"/>
+        <where>  
+            <if test="tempUuid != null  and tempUuid != ''"> and temp_uuid = #{tempUuid}</if>
+            <if test="groupUuid != null  and groupUuid != ''"> and group_uuid = #{groupUuid}</if>
+            <if test="dataType != null  and dataType != ''"> and data_type = #{dataType}</if>
+            <if test="tagUnit != null  and tagUnit != ''"> and tag_unit = #{tagUnit}</if>
+            <if test="fillType != null  and fillType != ''"> and fill_type = #{fillType}</if>
+        </where>
+    </select>
+    
+    <select id="selectTemplateGroupTagInfoById" parameterType="Long" resultMap="TemplateGroupTagInfoResult">
+        <include refid="selectTemplateGroupTagInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTemplateGroupTagInfo" parameterType="TemplateGroupTagInfo">
+        insert into template_group_tag_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uuid != null">uuid,</if>
+            <if test="tempUuid != null">temp_uuid,</if>
+            <if test="groupUuid != null">group_uuid,</if>
+            <if test="tagName != null">tag_name,</if>
+            <if test="tagUuid != null">tag_uuid,</if>
+            <if test="dataType != null">data_type,</if>
+            <if test="tagUnit != null">tag_unit,</if>
+            <if test="fillTagName != null">fill_tag_name,</if>
+            <if test="fillType != null">fill_type,</if>
+            <if test="排序 != null">排序,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="version != null">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uuid != null">#{uuid},</if>
+            <if test="tempUuid != null">#{tempUuid},</if>
+            <if test="groupUuid != null">#{groupUuid},</if>
+            <if test="tagName != null">#{tagName},</if>
+            <if test="tagUuid != null">#{tagUuid},</if>
+            <if test="dataType != null">#{dataType},</if>
+            <if test="tagUnit != null">#{tagUnit},</if>
+            <if test="fillTagName != null">#{fillTagName},</if>
+            <if test="fillType != null">#{fillType},</if>
+            <if test="排序 != null">#{排序},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="version != null">#{version},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTemplateGroupTagInfo" parameterType="TemplateGroupTagInfo">
+        update template_group_tag_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tempUuid != null">temp_uuid = #{tempUuid},</if>
+            <if test="groupUuid != null">group_uuid = #{groupUuid},</if>
+            <if test="tagName != null">tag_name = #{tagName},</if>
+            <if test="tagUuid != null">tag_uuid = #{tagUuid},</if>
+            <if test="dataType != null">data_type = #{dataType},</if>
+            <if test="tagUnit != null">tag_unit = #{tagUnit},</if>
+            <if test="fillTagName != null">fill_tag_name = #{fillTagName},</if>
+            <if test="fillType != null">fill_type = #{fillType},</if>
+            <if test="排序 != null">排序 = #{排序},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="version != null">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTemplateGroupTagInfoById" parameterType="Long">
+        delete from template_group_tag_info where id = #{id}
+    </delete>
+
+    <delete id="deleteTemplateGroupTagInfoByIds" parameterType="String">
+        delete from template_group_tag_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

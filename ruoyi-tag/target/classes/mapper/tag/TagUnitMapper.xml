@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.tag.mapper.TagUnitMapper">
+    
+    <resultMap type="TagUnit" id="TagUnitResult">
+        <result property="id"    column="id"    />
+        <result property="uuid"    column="uuid"    />
+        <result property="unitName"    column="unit_name"    />
+        <result property="uintSymbol"    column="uint_symbol"    />
+        <result property="unitType"    column="unit_type"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+
+    <sql id="selectTagUnitVo">
+        select id, uuid, unit_name, uint_symbol, unit_type, create_by, create_time, update_by, update_time, version from tag_unit
+    </sql>
+
+    <select id="selectTagUnitList" parameterType="TagUnit" resultMap="TagUnitResult">
+        <include refid="selectTagUnitVo"/>
+        <where>  
+            <if test="unitName != null  and unitName != ''"> and unit_name like concat('%', #{unitName}, '%')</if>
+            <if test="uintSymbol != null  and uintSymbol != ''"> and uint_symbol = #{uintSymbol}</if>
+            <if test="unitType != null  and unitType != ''"> and unit_type = #{unitType}</if>
+        </where>
+    </select>
+    
+    <select id="selectTagUnitById" parameterType="Long" resultMap="TagUnitResult">
+        <include refid="selectTagUnitVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTagUnit" parameterType="TagUnit">
+        insert into tag_unit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uuid != null">uuid,</if>
+            <if test="unitName != null">unit_name,</if>
+            <if test="uintSymbol != null">uint_symbol,</if>
+            <if test="unitType != null">unit_type,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="version != null">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uuid != null">#{uuid},</if>
+            <if test="unitName != null">#{unitName},</if>
+            <if test="uintSymbol != null">#{uintSymbol},</if>
+            <if test="unitType != null">#{unitType},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="version != null">#{version},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTagUnit" parameterType="TagUnit">
+        update tag_unit
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="unitName != null">unit_name = #{unitName},</if>
+            <if test="uintSymbol != null">uint_symbol = #{uintSymbol},</if>
+            <if test="unitType != null">unit_type = #{unitType},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="version != null">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTagUnitById" parameterType="Long">
+        delete from tag_unit where id = #{id}
+    </delete>
+
+    <delete id="deleteTagUnitByIds" parameterType="String">
+        delete from tag_unit where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

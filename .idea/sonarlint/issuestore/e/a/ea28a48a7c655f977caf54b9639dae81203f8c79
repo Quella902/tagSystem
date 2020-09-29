@@ -1,0 +1,24 @@
+
+h
+java:S3027Ì"JPut single-quotes around '.' to use the faster "lastIndexOf(char)" method.(ÿÊ‰ 8ÖÑ¸’É.
+W
+java:S1118":Add a private constructor to hide the implicit public one.(èº·š8ÖÑ¸’É.
+|
+java:S2293Ù"YReplace the type specification in this constructor call with the diamond operator ("<>").(‹•Šûÿÿÿÿ8ÖÑ¸’É.
+]	java:S125q"<This block of commented-out lines of code should be removed.(¿½øÀÿÿÿÿÿ8È»’É.
+v
+java:S2293j"YReplace the type specification in this constructor call with the diamond operator ("<>").(İóˆ·8ÖÑ¸’É.
+b
+java:S3252H"EUse static access with "com.alibaba.fastjson.JSON" for "parseObject".(ÂìœÍ8ÖÑ¸’É.
+c
+java:S3252º"EUse static access with "com.alibaba.fastjson.JSON" for "parseObject".(ÂìœÍ8ÖÑ¸’É.
+b
+java:S3252P"EUse static access with "com.alibaba.fastjson.JSON" for "parseObject".(ÂìœÍ8ÖÑ¸’É.
+D
+java:S1075•"&Remove this hard-coded path-delimiter.(Ô˜ü8ÖÑ¸’É.
+
+java:S1319×"mThe return type of this method should be an interface such as "Set" rather than the implementation "HashSet".(Åˆ§¬ÿÿÿÿÿ8ÖÑ¸’É.
+†
+java:S1488Í"cImmediately return this expression instead of assigning it to the temporary variable "basePackage".(‚ÚÍşşÿÿÿÿ8ÖÑ¸’É.
+C
+java:S1075–"&Remove this hard-coded path-delimiter.(š²õG8ÖÑ¸’É.

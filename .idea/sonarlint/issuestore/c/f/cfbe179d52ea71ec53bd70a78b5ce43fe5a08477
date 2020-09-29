@@ -1,0 +1,5 @@
+
+[
+java:S3252,"EUse static access with "com.alibaba.fastjson.JSON" for "parseObject".(«Ÿë­
+U
+java:S1118":Add a private constructor to hide the implicit public one.(Ý¯»æüÿÿÿÿ

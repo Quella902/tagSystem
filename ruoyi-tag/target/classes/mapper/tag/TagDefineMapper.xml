@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.tag.mapper.TagDefineMapper">
+
+    <resultMap type="TagDefine" id="TagDefineResult">
+        <result property="id"    column="id"    />
+        <result property="uuid"    column="uuid"    />
+        <result property="tagName"    column="tag_name"    />
+        <result property="typeUuid"    column="type_uuid"    />
+        <result property="typeName"    column="type_name"    />
+        <result property="parentUuid"    column="parent_uuid"    />
+        <result property="parentName"    column="parent_name"    />
+        <result property="unitType"    column="unit_type"    />
+        <result property="unitNameDefault"    column="unit_name_default"    />
+        <result property="unitUuidDefault"    column="unit_uuid_default"    />
+        <result property="dataType"    column="data_type"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+
+    <sql id="selectTagDefineVo">
+        select id, uuid, tag_name, type_uuid, type_name, parent_uuid, parent_name, unit_type, unit_name_default, unit_uuid_default, data_type, remark, create_by, create_time, update_by, update_time, version from tag_define
+    </sql>
+
+    <select id="selectTagDefineList" parameterType="TagDefine" resultMap="TagDefineResult">
+        <include refid="selectTagDefineVo"/>
+        <where>
+            <if test="tagName != null  and tagName != ''"> and tag_name like concat('%', #{tagName}, '%')</if>
+            <if test="typeUuid != null  and typeUuid != ''"> and type_uuid = #{typeUuid}</if>
+            <if test="typeName != null  and typeName != ''"> and type_name like concat('%', #{typeName}, '%')</if>
+            <if test="parentUuid != null  and parentUuid != ''"> and parent_uuid = #{parentUuid}</if>
+            <if test="unitType != null  and unitType != ''"> and unit_type = #{unitType}</if>
+            <if test="unitNameDefault != null  and unitNameDefault != ''"> and unit_name_default = #{unitNameDefault}</if>
+            <if test="unitUuidDefault != null  and unitUuidDefault != ''"> and unit_uuid_default = #{unitUuidDefault}</if>
+            <if test="dataType != null  and dataType != ''"> and data_type = #{dataType}</if>
+        </where>
+    </select>
+
+    <select id="selectTagDefineById" parameterType="Long" resultMap="TagDefineResult">
+        <include refid="selectTagDefineVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTagDefine" parameterType="TagDefine">
+        insert into tag_define
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uuid != null">uuid,</if>
+            <if test="tagName != null">tag_name,</if>
+            <if test="typeUuid != null">type_uuid,</if>
+            <if test="typeName != null">type_name,</if>
+            <if test="parentUuid != null">parent_uuid,</if>
+            <if test="parentName != null">parent_name,</if>
+            <if test="unitType != null">unit_type,</if>
+            <if test="unitNameDefault != null">unit_name_default,</if>
+            <if test="unitUuidDefault != null">unit_uuid_default,</if>
+            <if test="dataType != null">data_type,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="version != null">version,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uuid != null">#{uuid},</if>
+            <if test="tagName != null">#{tagName},</if>
+            <if test="typeUuid != null">#{typeUuid},</if>
+            <if test="typeName != null">#{typeName},</if>
+            <if test="parentUuid != null">#{parentUuid},</if>
+            <if test="parentName != null">#{parentName},</if>
+            <if test="unitType != null">#{unitType},</if>
+            <if test="unitNameDefault != null">#{unitNameDefault},</if>
+            <if test="unitUuidDefault != null">#{unitUuidDefault},</if>
+            <if test="dataType != null">#{dataType},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="version != null">#{version},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTagDefine" parameterType="TagDefine">
+        update tag_define
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uuid != null">uuid = #{uuid},</if>
+            <if test="tagName != null">tag_name = #{tagName},</if>
+            <if test="typeUuid != null">type_uuid = #{typeUuid},</if>
+            <if test="typeName != null">type_name = #{typeName},</if>
+            <if test="parentUuid != null">parent_uuid = #{parentUuid},</if>
+            <if test="parentName != null">parent_name = #{parentName},</if>
+            <if test="unitType != null">unit_type = #{unitType},</if>
+            <if test="unitNameDefault != null">unit_name_default = #{unitNameDefault},</if>
+            <if test="unitUuidDefault != null">unit_uuid_default = #{unitUuidDefault},</if>
+            <if test="dataType != null">data_type = #{dataType},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="version != null">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTagDefineById" parameterType="Long">
+        delete from tag_define where id = #{id}
+    </delete>
+
+    <delete id="deleteTagDefineByIds" parameterType="String">
+        delete from tag_define where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

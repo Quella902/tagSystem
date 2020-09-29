@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.tag.mapper.ReportDefineMapper">
+    
+    <resultMap type="ReportDefine" id="ReportDefineResult">
+        <result property="id"    column="id"    />
+        <result property="uuid"    column="uuid"    />
+        <result property="industryType"    column="industry_type"    />
+        <result property="reportName"    column="report_name"    />
+        <result property="tagTemplateName"    column="tag_template_name"    />
+        <result property="tagTemplateUuid"    column="tag_template_uuid"    />
+        <result property="cycle"    column="cycle"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="version"    column="version"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="companyUuid"    column="company_uuid"    />
+    </resultMap>
+
+    <sql id="selectReportDefineVo">
+        select id, uuid, industry_type, report_name, tag_template_name, tag_template_uuid, cycle, start_time, end_time, create_by, create_time, update_by, update_time, version, company_name, company_uuid from report_define
+    </sql>
+
+    <select id="selectReportDefineList" parameterType="ReportDefine" resultMap="ReportDefineResult">
+        <include refid="selectReportDefineVo"/>
+        <where>  
+            <if test="industryType != null  and industryType != ''"> and industry_type = #{industryType}</if>
+            <if test="reportName != null  and reportName != ''"> and report_name like concat('%', #{reportName}, '%')</if>
+            <if test="tagTemplateName != null  and tagTemplateName != ''"> and tag_template_name like concat('%', #{tagTemplateName}, '%')</if>
+            <if test="cycle != null  and cycle != ''"> and cycle = #{cycle}</if>
+            <if test="startTime != null  and startTime != ''"> and start_time = #{startTime}</if>
+            <if test="endTime != null  and endTime != ''"> and end_time = #{endTime}</if>
+            <if test="version != null "> and version = #{version}</if>
+            <if test="companyName != null  and companyName != ''"> and company_name like concat('%', #{companyName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectReportDefineById" parameterType="Long" resultMap="ReportDefineResult">
+        <include refid="selectReportDefineVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertReportDefine" parameterType="ReportDefine">
+        insert into report_define
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uuid != null">uuid,</if>
+            <if test="industryType != null">industry_type,</if>
+            <if test="reportName != null">report_name,</if>
+            <if test="tagTemplateName != null">tag_template_name,</if>
+            <if test="tagTemplateUuid != null">tag_template_uuid,</if>
+            <if test="cycle != null">cycle,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="version != null">version,</if>
+            <if test="companyName != null">company_name,</if>
+            <if test="companyUuid != null">company_uuid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uuid != null">#{uuid},</if>
+            <if test="industryType != null">#{industryType},</if>
+            <if test="reportName != null">#{reportName},</if>
+            <if test="tagTemplateName != null">#{tagTemplateName},</if>
+            <if test="tagTemplateUuid != null">#{tagTemplateUuid},</if>
+            <if test="cycle != null">#{cycle},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="version != null">#{version},</if>
+            <if test="companyName != null">#{companyName},</if>
+            <if test="companyUuid != null">#{companyUuid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateReportDefine" parameterType="ReportDefine">
+        update report_define
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="industryType != null">industry_type = #{industryType},</if>
+            <if test="reportName != null">report_name = #{reportName},</if>
+            <if test="tagTemplateName != null">tag_template_name = #{tagTemplateName},</if>
+            <if test="tagTemplateUuid != null">tag_template_uuid = #{tagTemplateUuid},</if>
+            <if test="cycle != null">cycle = #{cycle},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="version != null">version = #{version},</if>
+            <if test="companyName != null">company_name = #{companyName},</if>
+            <if test="companyUuid != null">company_uuid = #{companyUuid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteReportDefineById" parameterType="Long">
+        delete from report_define where id = #{id}
+    </delete>
+
+    <delete id="deleteReportDefineByIds" parameterType="String">
+        delete from report_define where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
